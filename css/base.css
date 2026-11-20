@@ -1,0 +1,432 @@
+/* Base layout, reset, local system typography, and 60fps Calm UI shell */
+
+:root {
+    --font-display: 'Avenir Next', 'SF Pro Rounded', 'Nunito', 'Segoe UI Rounded', 'Trebuchet MS', system-ui, sans-serif;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --font-mono: 'SF Mono', ui-monospace, 'Cascadia Mono', 'Segoe UI Mono', Consolas, monospace;
+
+    --light-x: 35%;
+    --light-y: 25%;
+    --surface-bg: #1c1512;
+    --text-primary: #f5ebe6;
+    --text-muted: rgba(245, 235, 230, 0.58);
+    --accent-color: #c93028;
+    --accent-glow: rgba(201, 48, 40, 0.35);
+    --sheet-bg: #1e1815;
+    --sheet-border: rgba(255, 255, 255, 0.1);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100dvh;
+    overflow: hidden;
+    overscroll-behavior: none;
+    font-family: var(--font-sans);
+    color: var(--text-primary);
+    background-color: var(--surface-bg);
+}
+
+button {
+    font-family: inherit;
+    color: inherit;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+button:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+.app-shell {
+    width: 100%;
+    height: 100dvh;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: max(12px, env(safe-area-inset-top)) 14px max(12px, env(safe-area-inset-bottom));
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+}
+
+/* Header & Compact Telemetry */
+.top-bar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 10;
+    flex-shrink: 0;
+}
+
+.brand-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.brand-identity {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand-badge {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 16px;
+    letter-spacing: -0.02em;
+    flex-shrink: 0;
+}
+
+.brand-titles {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+}
+
+.brand-subtitle {
+    margin: 2px 0 0;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+}
+
+.grid-pill {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--text-primary);
+    letter-spacing: 0.04em;
+}
+
+.stats-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.15fr;
+    gap: 8px;
+    width: 100%;
+}
+
+.stat-card {
+    border-radius: 12px;
+    padding: 6px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+}
+
+.stat-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.stat-value {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-top: 1px;
+}
+
+.stat-value--compact {
+    font-size: 13px;
+    line-height: 1.3;
+}
+
+/* Reserved HUD slot (collapsed when empty in M1; expanded in M3/M4) */
+.hud-slot {
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.hud-slot:empty {
+    display: none;
+}
+
+/* Main Stage & Puzzle Board */
+.stage {
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.board-frame {
+    width: min(92vw, 52dvh, 410px);
+    border-radius: 26px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.frame-engraving {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6px;
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+}
+
+.frame-engraving--top {
+    padding-bottom: 6px;
+}
+
+.frame-engraving--bottom {
+    padding-top: 6px;
+    font-size: 9px;
+    opacity: 0.78;
+}
+
+.board-well {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 14px;
+    position: relative;
+    overflow: hidden;
+    touch-action: none;
+}
+
+.board-well::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+    background-size: var(--cell-pct, 25%) var(--cell-pct, 25%);
+    pointer-events: none;
+}
+
+/* IMPORTANT: No CSS transform transition here — SpringPhysicsEngine drives 60fps translate3d */
+.puzzle-tile {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 3px;
+    will-change: transform;
+    cursor: grab;
+    touch-action: none;
+    z-index: 10;
+}
+
+.puzzle-tile:active {
+    cursor: grabbing;
+}
+
+.tile-surface {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.2s ease, filter 0.12s ease;
+}
+
+.puzzle-tile:active .tile-surface {
+    filter: brightness(0.97);
+}
+
+.tile-media-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    border-radius: inherit;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.board-well.has-media .tile-media-canvas {
+    display: block;
+}
+
+.board-well.has-media .tile-groove {
+    opacity: 0.25;
+}
+
+.tile-specular {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    border-radius: inherit;
+    background: radial-gradient(
+        circle at var(--light-x, 35%) var(--light-y, 25%),
+        rgba(255, 255, 255, 0.26) 0%,
+        rgba(255, 255, 255, 0.05) 38%,
+        transparent 70%
+    );
+    mix-blend-mode: soft-light;
+}
+
+.tile-groove {
+    position: absolute;
+    inset: 6px;
+    border-radius: 6px;
+    pointer-events: none;
+}
+
+.tile-number {
+    position: relative;
+    z-index: 3;
+    font-family: var(--font-display);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    transform: translateY(-0.5px);
+}
+
+.board-well[data-size='3'] .tile-number {
+    font-size: clamp(28px, 8.5vw, 44px);
+}
+
+.board-well[data-size='4'] .tile-number {
+    font-size: clamp(22px, 6.2vw, 32px);
+}
+
+.board-well[data-size='5'] .tile-number {
+    font-size: clamp(17px, 4.6vw, 24px);
+}
+
+body[data-theme] .board-well.has-media[data-size] .tile-number {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    transform: none;
+    padding: 2px 6px;
+    border-radius: 7px;
+    font-size: 11px;
+    line-height: 1.2;
+    letter-spacing: 0;
+    background: rgba(10, 12, 18, 0.72);
+    color: #ffffff;
+    text-shadow: none;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    transition: opacity 0.16s ease;
+}
+
+body[data-theme] .board-well.has-media:not(.show-media-numbers)[data-size] .tile-number {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Correct position indicator ("Spia OK") */
+.correct-dot {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #10b981;
+    box-shadow: 0 0 6px rgba(16, 185, 129, 0.9), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+    opacity: 0;
+    transform: scale(0.35);
+    transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 3;
+    pointer-events: none;
+}
+
+.show-hints .is-correct .correct-dot {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Bottom Thumb-Friendly Dock */
+.bottom-dock {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 10;
+    flex-shrink: 0;
+}
+
+.dock-actions {
+    display: grid;
+    grid-template-columns: 1.35fr 0.85fr 0.85fr 0.95fr;
+    gap: 6px;
+    width: 100%;
+}
+
+.dock-hint {
+    margin: 0;
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.2;
+}
+
+@media (max-height: 680px) {
+    .board-frame {
+        width: min(86vw, 47dvh, 360px);
+        padding: 11px;
+    }
+
+    .dock-hint {
+        display: none;
+    }
+}

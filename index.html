@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#17110e">
+    <title>Gioco del 15 — Tattile</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/svg+xml" href="assets/icon-192.svg">
+    <link rel="apple-touch-icon" href="assets/icon-192.svg">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/modes.css">
+</head>
+<body data-theme="plastic" data-plastic-variant="bicolor">
+    <div class="app-shell">
+        <header class="top-bar">
+            <div class="brand-row">
+                <div class="brand-identity">
+                    <div class="brand-badge" id="brandBadge">15</div>
+                    <div class="brand-titles">
+                        <h1 class="brand-title">GIOCO DEL <span id="headerTitleNum">15</span></h1>
+                        <p class="brand-subtitle" id="materialSubtitle">Plastica Vintage '70</p>
+                    </div>
+                </div>
+                <button id="gridPillBtn" class="grid-pill" type="button" title="Cambia griglia o impostazioni">
+                    <span id="gridBadgeText">4×4</span>
+                </button>
+            </div>
+
+            <div class="stats-strip">
+                <div class="stat-card">
+                    <span class="stat-label">Mosse</span>
+                    <span id="movesDisplay" class="stat-value">0</span>
+                    <span id="parSubLabel" class="stat-sub hidden"></span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Tempo</span>
+                    <span id="timeDisplay" class="stat-value">00:00</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">
+                        <svg width="11" height="11" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" style="color: #fbbf24;">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                        </svg>
+                        Record
+                    </span>
+                    <span id="bestDisplay" class="stat-value stat-value--compact">-- / --:--</span>
+                </div>
+            </div>
+        </header>
+
+        <div id="hudSlot" class="hud-slot" aria-live="polite"></div>
+        <div id="ghostBarSlot" class="ghost-bar-slot" aria-live="off"></div>
+
+        <main class="stage">
+            <div id="boardOuterFrame" class="board-frame">
+                <div class="frame-engraving frame-engraving--top">
+                    <span id="frameTopBrand">★ TAVOLETTA MAGICA ★</span>
+                    <span id="gridSubLabel">N° 1 - 15</span>
+                </div>
+                <div id="boardWell" class="board-well show-hints" data-size="4" style="--cell-pct: 25%;"></div>
+                <div class="frame-engraving frame-engraving--bottom">
+                    <span>OFFLINE-FIRST</span>
+                    <span id="frameBottomCraft">MADE IN ITALY</span>
+                </div>
+            </div>
+        </main>
+
+        <footer class="bottom-dock">
+            <div class="dock-actions">
+                <button id="shuffleBtn" class="tactile-btn tactile-btn--primary" type="button">
+                    <svg fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                    </svg>
+                    <span>Mescola</span>
+                </button>
+
+                <button id="hintBtn" class="tactile-btn" type="button" title="Suggerimento intelligente IA">
+                    <svg fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                    </svg>
+                    <span>Hint</span>
+                </button>
+
+                <button id="quickAudioBtn" class="tactile-btn" type="button" title="Cambia modalità audio (Materico / Zen / Muto)">
+                    <svg id="audioIconOn" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
+                    </svg>
+                    <svg id="audioIconOff" class="hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15zM17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/>
+                    </svg>
+                    <span id="quickAudioLabel" class="audio-chip-label">Suono</span>
+                </button>
+
+                <button id="menuBtn" class="tactile-btn" type="button" aria-expanded="false" aria-controls="settingsDrawer">
+                    <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                    <span>Menu</span>
+                </button>
+            </div>
+            <p class="dock-hint">Tocca o trascina una tessera (anche intere righe o colonne) verso lo spazio vuoto</p>
+        </footer>
+    </div>
+
+    <!-- Bottom Sheet Drawer -->
+    <div id="drawerBackdrop" class="drawer-backdrop" aria-hidden="true"></div>
+    <aside id="settingsDrawer" class="bottom-sheet" role="dialog" aria-modal="true" aria-label="Impostazioni Gioco del 15" aria-hidden="true">
+        <div class="sheet-handle-zone" id="sheetDragHandle">
+            <div class="sheet-handle"></div>
+            <div class="sheet-header">
+                <h2 class="sheet-title">Controlli &amp; Materiali</h2>
+                <button id="closeDrawerBtn" class="sheet-close-btn" type="button" aria-label="Chiudi menu">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="sheet-tabs" role="tablist">
+                <button class="sheet-tab is-active" type="button" role="tab" aria-selected="true" data-tab="game">Gioco</button>
+                <button class="sheet-tab" type="button" role="tab" aria-selected="false" data-tab="modes">Sfide</button>
+                <button class="sheet-tab" type="button" role="tab" aria-selected="false" data-tab="style">Stile</button>
+                <button class="sheet-tab" type="button" role="tab" aria-selected="false" data-tab="sensors">Sensori</button>
+            </div>
+        </div>
+
+        <div class="sheet-body">
+            <!-- Tab: Gioco -->
+            <section class="tab-panel is-active" data-tab-panel="game">
+                <div class="control-group">
+                    <span class="control-label">Dimensione Griglia</span>
+                    <div class="segmented-control" role="group" aria-label="Dimensione griglia">
+                        <button type="button" class="seg-btn size-btn" data-size="3">3×3 (8)</button>
+                        <button type="button" class="seg-btn size-btn is-active" data-size="4">4×4 (15)</button>
+                        <button type="button" class="seg-btn size-btn" data-size="5">5×5 (24)</button>
+                    </div>
+                </div>
+
+                <div class="toggle-row">
+                    <div class="toggle-meta">
+                        <span class="toggle-title">Spia OK</span>
+                        <span class="toggle-desc">Evidenzia le tessere nella posizione corretta</span>
+                    </div>
+                    <button id="hintsToggleSwitch" class="switch-btn" type="button" role="switch" aria-checked="true">
+                        <span class="switch-knob"></span>
+                    </button>
+                </div>
+
+                <div class="toggle-row">
+                    <div class="toggle-meta">
+                        <span class="toggle-title">Feedback Aptico</span>
+                        <span id="hapticsDesc" class="toggle-desc">Vibrazione proporzionale al numero di tessere spinte</span>
+                    </div>
+                    <button id="hapticsToggleSwitch" class="switch-btn" type="button" role="switch" aria-checked="true">
+                        <span class="switch-knob"></span>
+                    </button>
+                </div>
+
+                <div class="control-group">
+                    <span class="control-label">Backup Dati (JSON)</span>
+                    <div class="backup-actions">
+                        <button id="exportBackupBtn" class="chip-action-btn" type="button">Esporta JSON</button>
+                        <button id="importBackupBtn" class="chip-action-btn" type="button">Importa JSON</button>
+                    </div>
+                    <input id="importBackupInput" type="file" accept="application/json,.json" class="hidden">
+                    <p id="backupStatusMsg" class="status-note hidden" role="status"></p>
+                </div>
+            </section>
+
+            <!-- Tab: Sfide & Speedsolving -->
+            <section class="tab-panel" data-tab-panel="modes">
+                <div class="control-group">
+                    <span class="control-label">Modalità di Gioco</span>
+                    <div class="segmented-control" role="group" aria-label="Modalità di gioco">
+                        <button type="button" class="seg-btn play-mode-btn is-active" data-play-mode="classic">Classica</button>
+                        <button type="button" class="seg-btn play-mode-btn" data-play-mode="daily">Quotidiana</button>
+                        <button type="button" class="seg-btn play-mode-btn" data-play-mode="speed">Speed WCA</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <span class="control-label">Modificatori Arcade</span>
+                    <div class="toggle-row">
+                        <div class="toggle-meta">
+                            <span class="toggle-title">Nebbia di guerra</span>
+                            <span class="toggle-desc">Numeri visibili solo vicino allo spazio vuoto</span>
+                        </div>
+                        <button id="arcadeFogSwitch" class="switch-btn" type="button" role="switch" aria-checked="false">
+                            <span class="switch-knob"></span>
+                        </button>
+                    </div>
+                    <div class="toggle-row">
+                        <div class="toggle-meta">
+                            <span class="toggle-title">Tessere ghiacciate</span>
+                            <span class="toggle-desc">1–2 tessere bloccate per le prime 10 mosse</span>
+                        </div>
+                        <button id="arcadeIceSwitch" class="switch-btn" type="button" role="switch" aria-checked="false">
+                            <span class="switch-knob"></span>
+                        </button>
+                    </div>
+                    <div class="toggle-row">
+                        <div class="toggle-meta">
+                            <span class="toggle-title">Modalità Memoria</span>
+                            <span class="toggle-desc">15s per osservare, poi cieca (sbircia +5s)</span>
+                        </div>
+                        <button id="arcadeMemorySwitch" class="switch-btn" type="button" role="switch" aria-checked="false">
+                            <span class="switch-knob"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="dailyInfoCard" class="mode-info-card">
+                    <div class="mode-info-row">
+                        <span class="mode-info-title">Sfida Quotidiana · <span id="dailyDateLabel">--</span></span>
+                        <span id="dailyStatusBadge" class="mode-info-sub">Da completare</span>
+                    </div>
+                    <span id="dailyStatusDetail" class="mode-info-sub">Stessa configurazione per tutti, basata sulla data di oggi.</span>
+                    <button id="drawerCopyDailyBtn" class="copy-daily-btn hidden" type="button">Copia risultato di oggi</button>
+                </div>
+
+                <div id="speedStatsCard" class="mode-info-card">
+                    <div class="mode-info-row">
+                        <span class="mode-info-title">Statistiche Speed WCA (<span id="speedStatsGridLabel">4×4</span>)</span>
+                        <span id="speedCountLabel" class="mode-info-sub">0 solve</span>
+                    </div>
+                    <div class="speed-stats-grid">
+                        <div class="speed-stat-cell">
+                            <span class="speed-stat-k">PB</span>
+                            <span id="speedPbVal" class="speed-stat-v">--</span>
+                        </div>
+                        <div class="speed-stat-cell">
+                            <span class="speed-stat-k">Ao5</span>
+                            <span id="speedAo5Val" class="speed-stat-v">--</span>
+                        </div>
+                        <div class="speed-stat-cell">
+                            <span class="speed-stat-k">Ao12</span>
+                            <span id="speedAo12Val" class="speed-stat-v">--</span>
+                        </div>
+                        <div class="speed-stat-cell">
+                            <span class="speed-stat-k">TPS</span>
+                            <span id="speedTpsVal" class="speed-stat-v">--</span>
+                        </div>
+                    </div>
+                    <div id="speedTrendChart" class="trend-chart-box"></div>
+                </div>
+            </section>
+
+            <!-- Tab: Stile & Suono -->
+            <section class="tab-panel" data-tab-panel="style">
+                <div class="control-group">
+                    <span class="control-label">Materiale Tattile</span>
+                    <div class="material-grid">
+                        <button type="button" class="material-card is-active" data-theme-choice="plastic">
+                            <span class="material-swatch swatch-plastic"></span>
+                            <span class="material-info">
+                                <span class="material-name">Plastica '70</span>
+                                <span class="material-sub">Clack secco</span>
+                            </span>
+                        </button>
+                        <button type="button" class="material-card" data-theme-choice="walnut">
+                            <span class="material-swatch swatch-walnut"></span>
+                            <span class="material-info">
+                                <span class="material-name">Legno di Noce</span>
+                                <span class="material-sub">Colpo caldo</span>
+                            </span>
+                        </button>
+                        <button type="button" class="material-card" data-theme-choice="glass">
+                            <span class="material-swatch swatch-glass"></span>
+                            <span class="material-info">
+                                <span class="material-name">Vetro Satinato</span>
+                                <span class="material-sub">Tintinnio puro</span>
+                            </span>
+                        </button>
+                        <button type="button" class="material-card" data-theme-choice="aluminum">
+                            <span class="material-swatch swatch-aluminum"></span>
+                            <span class="material-info">
+                                <span class="material-name">Alluminio CNC</span>
+                                <span class="material-sub">Scatto metallico</span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="control-group" id="plasticVariantGroup">
+                    <span class="control-label">Livrea Plastica Vintage</span>
+                    <div class="segmented-control segmented-control--2">
+                        <button type="button" class="seg-btn plastic-var-btn is-active" data-plastic-var="bicolor">Bicolore Rosso/Avorio</button>
+                        <button type="button" class="seg-btn plastic-var-btn" data-plastic-var="ivory">Tutto Avorio</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <span class="control-label">Profilo Audio Procedurale</span>
+                    <div class="segmented-control">
+                        <button type="button" class="seg-btn audio-mode-btn is-active" data-audio-mode="material">Materico</button>
+                        <button type="button" class="seg-btn audio-mode-btn" data-audio-mode="zen">Audio Zen</button>
+                        <button type="button" class="seg-btn audio-mode-btn" data-audio-mode="off">Muto</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab: Sensori & Media -->
+            <section class="tab-panel" data-tab-panel="sensors">
+                <div class="control-group">
+                    <span class="control-label">Giroscopio</span>
+                    <div class="toggle-row">
+                        <div class="toggle-meta">
+                            <span class="toggle-title">Luce Dinamica</span>
+                            <span class="toggle-desc">Riflessi speculari reattivi all'inclinazione</span>
+                        </div>
+                        <button id="gyroLightSwitch" class="switch-btn" type="button" role="switch" aria-checked="false">
+                            <span class="switch-knob"></span>
+                        </button>
+                    </div>
+
+                    <div class="toggle-row">
+                        <div class="toggle-meta">
+                            <span class="toggle-title">Modalità Gravità</span>
+                            <span class="toggle-desc">Inclina il telefono per far scivolare le tessere</span>
+                        </div>
+                        <button id="gravityModeSwitch" class="switch-btn" type="button" role="switch" aria-checked="false">
+                            <span class="switch-knob"></span>
+                        </button>
+                    </div>
+
+                    <div id="gyroSubActions" class="sub-actions-row hidden">
+                        <button id="recalibrateGyroBtn" class="chip-action-btn" type="button">Ricalibra inclinazione</button>
+                    </div>
+                    <p id="gyroStatusMsg" class="status-note hidden" role="status"></p>
+                </div>
+
+                <div class="control-group">
+                    <span class="control-label">Tessere Vive (Foto &amp; Video)</span>
+                    <div class="segmented-control" role="group" aria-label="Sorgente visiva tessere">
+                        <button type="button" class="seg-btn media-mode-btn is-active" data-media-mode="none">Numeri</button>
+                        <button type="button" class="seg-btn media-mode-btn" data-media-mode="photo">Foto 1:1</button>
+                        <button type="button" class="seg-btn media-mode-btn" data-media-mode="video">Video Live</button>
+                    </div>
+
+                    <input id="photoFileInput" type="file" accept="image/*" class="hidden">
+
+                    <div id="mediaSubActions" class="sub-actions-row hidden">
+                        <button id="changePhotoBtn" class="chip-action-btn hidden" type="button">Cambia Foto</button>
+                        <button id="flipCameraBtn" class="chip-action-btn hidden" type="button">Cambia Camera</button>
+                    </div>
+
+                    <div class="toggle-row">
+                        <div class="toggle-meta">
+                            <span class="toggle-title">Numeri Guida</span>
+                            <span class="toggle-desc">Mostra i numeri discreti nell'angolo su foto e video</span>
+                        </div>
+                        <button id="mediaNumbersSwitch" class="switch-btn" type="button" role="switch" aria-checked="true">
+                            <span class="switch-knob"></span>
+                        </button>
+                    </div>
+
+                    <p id="mediaStatusMsg" class="status-note hidden" role="status"></p>
+                </div>
+            </section>
+        </div>
+    </aside>
+
+    <!-- Victory Modal -->
+    <div id="victoryModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="victoryHeading" aria-hidden="true">
+        <div class="victory-card">
+            <div class="victory-inner">
+                <div class="victory-crest" aria-hidden="true">
+                    <svg width="28" height="28" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1.323l3.954 1.582 1.599-.8a1 1 0 01.894 1.79l-1.233.616 1.738 5.42a1 1 0 01-.285 1.05A3.989 3.989 0 0115 15a3.989 3.989 0 01-2.667-1.019 1 1 0 01-.285-1.05l1.715-5.349L11 6.477V16h2a1 1 0 110 2H7a1 1 0 110-2h2V6.477L6.237 7.582l1.715 5.349a1 1 0 01-.285 1.05A3.989 3.989 0 015 15a3.989 3.989 0 01-2.667-1.019 1 1 0 01-.285-1.05l1.738-5.42-1.233-.617a1 1 0 01.894-1.788l1.599.799L9 4.323V3a1 1 0 011-1z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                <h2 id="victoryHeading" class="victory-title">COMPLETATO!</h2>
+                <p id="newRecordBadge" class="victory-record-badge hidden">★ Nuovo Record Personale ★</p>
+                <div class="victory-stats">
+                    <div class="victory-stat">
+                        <div class="victory-stat-label">Mosse</div>
+                        <div id="modalMoves" class="victory-stat-value">0</div>
+                    </div>
+                    <div class="victory-stat">
+                        <div class="victory-stat-label">Tempo</div>
+                        <div id="modalTime" class="victory-stat-value">00:00</div>
+                    </div>
+                </div>
+                <div id="victorySlot" class="victory-slot"></div>
+                <button id="playAgainBtn" class="tactile-btn tactile-btn--primary victory-cta" type="button">
+                    <span>Gioca Ancora</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,475 @@
+/* 4 Procedural Material Themes: Plastic Vintage, Walnut Wood, Frosted Glass, Anodized Aluminum */
+
+/* ==========================================================================
+   1. PLASTICA VINTAGE '70/'80 (Default)
+   ========================================================================== */
+body[data-theme='plastic'] {
+    --surface-bg: #17110e;
+    --text-primary: #f5ebe6;
+    --text-muted: rgba(245, 235, 230, 0.62);
+    --accent-color: #d03229;
+    --accent-glow: rgba(208, 50, 41, 0.35);
+    --sheet-bg: #1b1411;
+    --sheet-border: rgba(245, 222, 195, 0.14);
+    background:
+        radial-gradient(rgba(255, 215, 160, 0.045) 1px, transparent 0),
+        radial-gradient(rgba(0, 0, 0, 0.45) 1px, transparent 0),
+        radial-gradient(circle at 50% 35%, #2e241f 0%, #15100d 100%);
+    background-size: 24px 24px, 24px 24px, 100% 100%;
+    background-position: 0 0, 12px 12px, 0 0;
+}
+
+body[data-theme='plastic'] .brand-badge {
+    background: linear-gradient(145deg, #d03229, #7d1515);
+    border: 1px solid rgba(255, 185, 175, 0.4);
+    color: #fdf6e6;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45);
+}
+
+body[data-theme='plastic'] .stat-card {
+    background: #171210;
+    border: 1px solid #3b2f2a;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.85), 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+body[data-theme='plastic'] .board-frame {
+    background: linear-gradient(145deg, #a92626 0%, #7d1515 55%, #5e0d0d 100%);
+    border: 2px solid #470909;
+    box-shadow:
+        0 22px 45px rgba(0, 0, 0, 0.75),
+        0 6px 14px rgba(0, 0, 0, 0.5),
+        inset 0 3px 5px rgba(255, 160, 160, 0.42),
+        inset 0 -6px 10px rgba(40, 0, 0, 0.8),
+        inset 3px 0 5px rgba(255, 140, 140, 0.18),
+        inset -3px 0 5px rgba(40, 0, 0, 0.6);
+}
+
+body[data-theme='plastic'] .frame-engraving {
+    color: rgba(252, 235, 200, 0.76);
+    text-shadow: 0 -1px 1px rgba(40, 0, 0, 0.9), 0 1px 1px rgba(255, 200, 180, 0.25);
+}
+
+body[data-theme='plastic'] .board-well {
+    background: #220606;
+    border: 3px solid #3c0909;
+    box-shadow:
+        inset 0 8px 18px rgba(0, 0, 0, 0.92),
+        inset 0 2px 6px rgba(0, 0, 0, 0.95),
+        0 2px 2px rgba(255, 150, 150, 0.26);
+}
+
+body[data-theme='plastic'] .tile-ivory {
+    background: linear-gradient(145deg, #fffdf7 0%, #f5ebd6 65%, #e2d4b7 100%);
+    border: 1px solid #cbb994;
+    box-shadow:
+        0 4px 7px rgba(0, 0, 0, 0.62),
+        inset 0 2px 2px rgba(255, 255, 255, 0.95),
+        inset 0 -4px 5px rgba(163, 142, 108, 0.65),
+        inset 2px 0 2px rgba(255, 255, 255, 0.7),
+        inset -2px 0 3px rgba(163, 142, 108, 0.45);
+}
+
+body[data-theme='plastic'] .tile-red {
+    background: linear-gradient(145deg, #e03228 0%, #c21f17 65%, #9c140d 100%);
+    border: 1px solid #780f0a;
+    box-shadow:
+        0 4px 7px rgba(0, 0, 0, 0.62),
+        inset 0 2px 2px rgba(255, 160, 150, 0.65),
+        inset 0 -4px 5px rgba(75, 6, 3, 0.75),
+        inset 2px 0 2px rgba(255, 140, 130, 0.4),
+        inset -2px 0 3px rgba(75, 6, 3, 0.5);
+}
+
+body[data-theme='plastic'] .tile-ivory .tile-groove {
+    border: 1px solid rgba(180, 158, 120, 0.35);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.08), 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+body[data-theme='plastic'] .tile-red .tile-groove {
+    border: 1px solid rgba(80, 0, 0, 0.35);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 140, 140, 0.2);
+}
+
+body[data-theme='plastic'] .tile-ivory .tile-number {
+    color: #b81d18;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9), 0 -1px 1px rgba(70, 0, 0, 0.35);
+}
+
+body[data-theme='plastic'] .tile-ivory.classic-ink .tile-number {
+    color: #221d1a;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9), 0 -1px 1px rgba(0, 0, 0, 0.35);
+}
+
+body[data-theme='plastic'] .tile-red .tile-number {
+    color: #fdf6e6;
+    text-shadow: 0 1px 2px rgba(60, 0, 0, 0.85), 0 -1px 0 rgba(255, 255, 255, 0.28);
+}
+
+body[data-theme='plastic'] .show-hints .is-correct .tile-surface {
+    box-shadow:
+        0 4px 7px rgba(0, 0, 0, 0.62),
+        inset 0 0 0 2px rgba(16, 185, 129, 0.6),
+        inset 0 2px 2px rgba(255, 255, 255, 0.78);
+}
+
+/* ==========================================================================
+   2. LEGNO DI NOCE (Procedural woodgrain CSS + inline SVG data-URI)
+   ========================================================================== */
+body[data-theme='walnut'] {
+    --surface-bg: #16110d;
+    --text-primary: #f6ead8;
+    --text-muted: rgba(246, 234, 216, 0.62);
+    --accent-color: #c78b45;
+    --accent-glow: rgba(199, 139, 69, 0.35);
+    --sheet-bg: #1d140e;
+    --sheet-border: rgba(235, 192, 135, 0.16);
+    background:
+        repeating-linear-gradient(
+            87deg,
+            rgba(255, 215, 165, 0.015) 0px,
+            rgba(255, 215, 165, 0.015) 2px,
+            transparent 2px,
+            transparent 9px
+        ),
+        radial-gradient(circle at 50% 30%, #2a1d14 0%, #120c08 100%);
+}
+
+body[data-theme='walnut'] .brand-badge {
+    background: linear-gradient(145deg, #8b5629, #4a2b13);
+    border: 1px solid rgba(240, 198, 135, 0.35);
+    color: #fbead0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+body[data-theme='walnut'] .stat-card {
+    background: linear-gradient(180deg, #211710 0%, #170f0a 100%);
+    border: 1px solid #493221;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.75), 0 1px 0 rgba(255, 210, 160, 0.08);
+}
+
+body[data-theme='walnut'] .board-frame {
+    background-color: #462916;
+    background-image:
+        repeating-linear-gradient(
+            12deg,
+            rgba(255, 200, 140, 0.05) 0px,
+            rgba(255, 200, 140, 0.05) 2px,
+            rgba(20, 9, 3, 0.16) 2px,
+            rgba(20, 9, 3, 0.16) 7px
+        ),
+        linear-gradient(145deg, #5d361d 0%, #3d2211 55%, #2a160a 100%);
+    border: 2px solid #241207;
+    box-shadow:
+        0 24px 48px rgba(0, 0, 0, 0.78),
+        inset 0 2px 4px rgba(255, 205, 145, 0.25),
+        inset 0 -6px 12px rgba(15, 7, 2, 0.85);
+}
+
+body[data-theme='walnut'] .frame-engraving {
+    color: rgba(235, 198, 140, 0.78);
+    text-shadow: 0 -1px 1px rgba(15, 6, 1, 0.9), 0 1px 0 rgba(255, 215, 165, 0.18);
+}
+
+body[data-theme='walnut'] .board-well {
+    background:
+        radial-gradient(circle at 50% 45%, #163324 0%, #0d2117 100%);
+    border: 3px solid #29160a;
+    box-shadow:
+        inset 0 9px 18px rgba(0, 0, 0, 0.88),
+        inset 0 2px 5px rgba(0, 0, 0, 0.92),
+        0 1px 1px rgba(255, 205, 145, 0.16);
+}
+
+body[data-theme='walnut'] .tile-surface {
+    background-color: #7c4c29;
+    background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cpath d='M0 14 Q30 8 60 16 T120 12 M0 34 Q40 42 75 30 T120 38 M0 58 Q25 50 65 62 T120 55 M0 82 Q35 90 80 78 T120 84 M0 105 Q45 97 85 108 T120 102' fill='none' stroke='%232e1608' stroke-opacity='0.24' stroke-width='1.5'/%3E%3Cpath d='M0 24 Q35 20 70 27 T120 22 M0 47 Q30 53 70 43 T120 49 M0 70 Q40 64 80 73 T120 68 M0 94 Q30 100 75 91 T120 96' fill='none' stroke='%23d49b63' stroke-opacity='0.14' stroke-width='1.1'/%3E%3C/svg%3E"),
+        linear-gradient(150deg, #986137 0%, #734422 58%, #543016 100%);
+    background-size: 110px 110px, 100% 100%;
+    border: 1px solid #3c200d;
+    box-shadow:
+        0 4px 8px rgba(0, 0, 0, 0.65),
+        inset 0 2px 2px rgba(255, 214, 165, 0.28),
+        inset 0 -4px 6px rgba(24, 11, 4, 0.72),
+        inset 2px 0 3px rgba(255, 200, 145, 0.14);
+}
+
+body[data-theme='walnut'] .puzzle-tile:nth-child(3n) .tile-surface {
+    background-position: 28px 14px, 0 0;
+}
+
+body[data-theme='walnut'] .puzzle-tile:nth-child(3n + 1) .tile-surface {
+    background-position: -18px 42px, 0 0;
+}
+
+body[data-theme='walnut'] .tile-groove {
+    border: 1px solid rgba(250, 208, 152, 0.18);
+    box-shadow: inset 0 1px 2px rgba(18, 8, 2, 0.45);
+}
+
+body[data-theme='walnut'] .tile-number {
+    color: #f9e6c4;
+    text-shadow: 0 -1px 1px rgba(22, 9, 2, 0.9), 0 1px 1px rgba(255, 224, 178, 0.25);
+}
+
+body[data-theme='walnut'] .show-hints .is-correct .tile-surface {
+    box-shadow:
+        0 4px 8px rgba(0, 0, 0, 0.65),
+        inset 0 0 0 2px rgba(52, 211, 153, 0.52),
+        inset 0 2px 2px rgba(255, 214, 165, 0.28);
+}
+
+/* ==========================================================================
+   3. VETRO SATINATO (Glassmorphism multistrato con rifrazione)
+   ========================================================================== */
+body[data-theme='glass'] {
+    --surface-bg: #0b1322;
+    --text-primary: #eef6ff;
+    --text-muted: rgba(214, 232, 255, 0.64);
+    --accent-color: #38bdf8;
+    --accent-glow: rgba(56, 189, 248, 0.38);
+    --sheet-bg: rgba(13, 22, 38, 0.94);
+    --sheet-border: rgba(186, 230, 253, 0.22);
+    background:
+        radial-gradient(circle at 18% 18%, rgba(56, 189, 248, 0.26) 0%, transparent 45%),
+        radial-gradient(circle at 82% 76%, rgba(129, 140, 248, 0.24) 0%, transparent 48%),
+        radial-gradient(circle at 50% 45%, #16243d 0%, #09101d 100%);
+}
+
+body[data-theme='glass'] .brand-badge {
+    background: linear-gradient(145deg, rgba(56, 189, 248, 0.5), rgba(59, 130, 246, 0.35));
+    border: 1px solid rgba(186, 230, 253, 0.45);
+    color: #f0f9ff;
+    box-shadow: 0 4px 16px rgba(14, 165, 233, 0.25);
+}
+
+body[data-theme='glass'] .stat-card {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+body[data-theme='glass'] .board-frame {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.05) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow:
+        0 24px 50px rgba(3, 8, 20, 0.72),
+        inset 0 1px 1px rgba(255, 255, 255, 0.4),
+        inset 0 -2px 8px rgba(14, 165, 233, 0.14);
+}
+
+body[data-theme='glass'] .frame-engraving {
+    color: rgba(224, 242, 254, 0.8);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+body[data-theme='glass'] .board-well {
+    background: rgba(6, 12, 24, 0.62);
+    border: 1px solid rgba(186, 230, 253, 0.18);
+    box-shadow:
+        inset 0 6px 18px rgba(0, 0, 0, 0.72),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+body[data-theme='glass'] .tile-surface {
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.26) 0%,
+        rgba(186, 230, 253, 0.13) 48%,
+        rgba(125, 211, 252, 0.18) 100%
+    );
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.36);
+    box-shadow:
+        0 6px 14px rgba(2, 8, 23, 0.45),
+        inset 0 1.5px 2px rgba(255, 255, 255, 0.65),
+        inset 0 -2px 5px rgba(56, 189, 248, 0.22);
+}
+
+body[data-theme='glass'] .tile-groove {
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.12);
+}
+
+body[data-theme='glass'] .tile-number {
+    color: #ffffff;
+    text-shadow: 0 2px 6px rgba(4, 16, 36, 0.65), 0 0 12px rgba(186, 230, 253, 0.35);
+}
+
+body[data-theme='glass'] .show-hints .is-correct .tile-surface {
+    border-color: rgba(52, 211, 153, 0.72);
+    box-shadow:
+        0 6px 14px rgba(2, 8, 23, 0.45),
+        inset 0 0 0 1.5px rgba(52, 211, 153, 0.55),
+        inset 0 1.5px 2px rgba(255, 255, 255, 0.65);
+}
+
+/* ==========================================================================
+   4. ALLUMINIO ANODIZZATO (CNC brushed metal with milled bevels)
+   ========================================================================== */
+body[data-theme='aluminum'] {
+    --surface-bg: #15181d;
+    --text-primary: #eef1f5;
+    --text-muted: rgba(226, 232, 240, 0.58);
+    --accent-color: #f97316;
+    --accent-glow: rgba(249, 115, 22, 0.35);
+    --sheet-bg: #1a1e24;
+    --sheet-border: rgba(255, 255, 255, 0.14);
+    background:
+        radial-gradient(circle at 50% 25%, #272d36 0%, #121519 100%);
+}
+
+body[data-theme='aluminum'] .brand-badge {
+    background: linear-gradient(145deg, #64748b, #334155);
+    border: 1px solid rgba(226, 232, 240, 0.38);
+    color: #f8fafc;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45);
+}
+
+body[data-theme='aluminum'] .stat-card {
+    background: linear-gradient(180deg, #1e232a 0%, #16191f 100%);
+    border: 1px solid #343b46;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.75), 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+body[data-theme='aluminum'] .board-frame {
+    background-color: #474e58;
+    background-image:
+        repeating-linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.025) 0px,
+            rgba(255, 255, 255, 0.025) 1px,
+            rgba(0, 0, 0, 0.03) 1px,
+            rgba(0, 0, 0, 0.03) 3px
+        ),
+        linear-gradient(155deg, #69727f 0%, #444b55 52%, #2c3138 100%);
+    border: 2px solid #23272d;
+    box-shadow:
+        0 24px 48px rgba(0, 0, 0, 0.78),
+        inset 0 2px 2px rgba(255, 255, 255, 0.42),
+        inset 0 -5px 8px rgba(15, 18, 22, 0.75);
+}
+
+/* CNC corner screws on anodized frame */
+body[data-theme='aluminum'] .board-frame::before,
+body[data-theme='aluminum'] .board-frame::after {
+    content: '';
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    height: 6px;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at 3px 3px, #1e2228 0%, #1e2228 1.5px, #8b95a3 2px, #2b3038 3px, transparent 3.4px) left center / 6px 6px no-repeat,
+        radial-gradient(circle at 3px 3px, #1e2228 0%, #1e2228 1.5px, #8b95a3 2px, #2b3038 3px, transparent 3.4px) right center / 6px 6px no-repeat;
+}
+
+body[data-theme='aluminum'] .board-frame::before {
+    top: 9px;
+}
+
+body[data-theme='aluminum'] .board-frame::after {
+    bottom: 9px;
+}
+
+body[data-theme='aluminum'] .frame-engraving {
+    color: rgba(226, 232, 240, 0.78);
+    text-shadow: 0 -1px 0 rgba(15, 18, 22, 0.85), 0 1px 0 rgba(255, 255, 255, 0.25);
+    padding: 0 16px;
+}
+
+body[data-theme='aluminum'] .board-well {
+    background: #14171c;
+    border: 2px solid #262b33;
+    box-shadow:
+        inset 0 7px 16px rgba(0, 0, 0, 0.9),
+        0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+body[data-theme='aluminum'] .tile-surface {
+    border-radius: 8px;
+    background-color: #9ba4b0;
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.045) 0px,
+            rgba(255, 255, 255, 0.045) 1px,
+            rgba(0, 0, 0, 0.03) 1px,
+            rgba(0, 0, 0, 0.03) 2px
+        ),
+        linear-gradient(135deg, #d7dde5 0%, #9fa8b4 50%, #757e8a 100%);
+    border: 1px solid #525964;
+    box-shadow:
+        0 4px 8px rgba(0, 0, 0, 0.68),
+        inset 0 1.5px 1px rgba(255, 255, 255, 0.85),
+        inset 0 -3px 4px rgba(34, 38, 46, 0.65),
+        inset 1.5px 0 1px rgba(255, 255, 255, 0.55),
+        inset -1.5px 0 2px rgba(45, 50, 58, 0.45);
+}
+
+body[data-theme='aluminum'] .tile-groove {
+    inset: 5px;
+    border-radius: 5px;
+    border: 1px solid rgba(40, 45, 54, 0.24);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+body[data-theme='aluminum'] .tile-number {
+    color: #191d24;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.55), 0 -0.5px 0 rgba(0, 0, 0, 0.35);
+}
+
+body[data-theme='aluminum'] .show-hints .is-correct .tile-surface {
+    box-shadow:
+        0 4px 8px rgba(0, 0, 0, 0.68),
+        inset 0 0 0 2px rgba(16, 185, 129, 0.72),
+        inset 0 1.5px 1px rgba(255, 255, 255, 0.85);
+}
+
+/* ==========================================================================
+   Dynamic Specular Lighting (Gyroscope Tilt Response)
+   ========================================================================== */
+body.gyro-light-active[data-theme='plastic'] .tile-specular {
+    background: radial-gradient(
+        circle at var(--light-x, 35%) var(--light-y, 25%),
+        rgba(255, 255, 255, 0.44) 0%,
+        rgba(255, 245, 225, 0.12) 38%,
+        transparent 72%
+    );
+    mix-blend-mode: screen;
+}
+
+body.gyro-light-active[data-theme='walnut'] .tile-specular {
+    background: radial-gradient(
+        circle at var(--light-x, 35%) var(--light-y, 25%),
+        rgba(255, 222, 175, 0.34) 0%,
+        rgba(225, 170, 105, 0.1) 42%,
+        transparent 74%
+    );
+    mix-blend-mode: soft-light;
+}
+
+body.gyro-light-active[data-theme='glass'] .tile-specular {
+    background: radial-gradient(
+        circle at var(--light-x, 35%) var(--light-y, 25%),
+        rgba(255, 255, 255, 0.52) 0%,
+        rgba(125, 211, 252, 0.22) 34%,
+        transparent 68%
+    );
+    mix-blend-mode: screen;
+}
+
+body.gyro-light-active[data-theme='aluminum'] .tile-specular {
+    background: radial-gradient(
+        ellipse 115% 65% at var(--light-x, 35%) var(--light-y, 25%),
+        rgba(255, 255, 255, 0.48) 0%,
+        rgba(226, 232, 240, 0.14) 40%,
+        transparent 75%
+    );
+    mix-blend-mode: overlay;
+}
